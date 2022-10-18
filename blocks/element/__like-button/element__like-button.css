@@ -17,6 +17,6 @@
 }
 
 .element__like-button:active {
-    background: url(../../../images/like-button-active.svg);
+    background: url(../../../images/like-active.svg);
     opacity: 1;
 }
