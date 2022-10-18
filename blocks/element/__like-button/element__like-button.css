@@ -2,16 +2,21 @@
     width: 22px;
     height: 19px;
     padding: 0;
+    margin-right: 20px;
+
     background: url(../../../images/like-button.svg);
     background-repeat: no-repeat;
     box-sizing: border-box;
     background-position: center;
     border: 0;
     transition: opacity 0.3s;
-
-    margin-right: 20px;
 }
 
 .element__like-button:hover {
     opacity: 0.5;
+}
+
+.element__like-button:active {
+    background: url(../../../images/like-button-active.svg);
+    opacity: 1;
 }
