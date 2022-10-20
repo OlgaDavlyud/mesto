@@ -1,4 +1,4 @@
-.profile__signature {
+.profile__about-yourself {
     font-family: 'Inter', 'Arial', sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -15,13 +15,13 @@
 }
 
 @media screen and (max-width:879px) {
-    .profile__signature {
+    .profile__about-yourself {
         text-align: center;
     }
 }
 
 @media screen and (max-width:360px) {
-    .profile__signature {
+    .profile__about-yourself {
         font-size: 14px;
         line-height: 17px;
         padding-top: 14px;
