@@ -30,25 +30,25 @@ let jobProfile = profileElement.querySelector('.profile__about-yourself');
 
 // Обработчик «отправки» формы
 
-function changeName (evt) {
-    evt.preventDefault();
-
+function changeName() {
     if (nameInput.value !== nameProfile.value) {
         nameProfile.textContent = nameInput.value;
     }
-    closePopup();
 }
 
-function changeAboutYourself (evt) {
-    evt.preventDefault();
-
+function changeAboutYourself() {
     if (jobInput.value !== jobProfile.value) {
         jobProfile.textContent = jobInput.value;
     }
+}
+
+function submitForm(evt) {
+    evt.preventDefault();
+    changeName();
+    changeAboutYourself();
     closePopup();
 }
 
 
 //Прикрепляем обработчик к форме:
-formElement.addEventListener('submit', changeName);
-formElement.addEventListener('submit', changeAboutYourself);
+formElement.addEventListener('submit', submitForm);
