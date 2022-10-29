@@ -13,6 +13,13 @@ const profileElement = document.querySelector('.profile__info');
 let nameProfile = profileElement.querySelector('.profile__name');
 let jobProfile = profileElement.querySelector('.profile__about-yourself');
 
+const popupAddElement = document.querySelector('.popup-add');
+const popupAddButtonOpenElement = document.querySelector('.profile__add-button');
+const popupAddButtonCloseElement = popupAddElement.querySelector('.popup-add__button-close');
+
+const formAddElement = document.querySelector('.popup__container');
+const nameTitleAdd = formAddElement.querySelector('.popup__input-title-name');
+const urlImage = formAddElement.querySelector('.popup-add__input-url-image');
 
 //Создаем функции
 const openPopup = function() {
@@ -46,8 +53,17 @@ function submitForm(evt) {
     closePopup();
 }
 
+const openPopupAdd = function() {
+    popupAddElement.classList.add('popup-add_opened');
+}
+
+const closePopupAdd = function() {
+    popupAddElement.classList.remove('popup-add_opened');
+}
 
 //Cлушатели событий
 popupButtonOpenElement.addEventListener('click', openPopup);
 popupButtonCloseElement.addEventListener('click', closePopup);
 formElement.addEventListener('submit', submitForm);
+popupAddButtonOpenElement.addEventListener('click', openPopupAdd);
+popupAddButtonCloseElement.addEventListener('click', closePopupAdd);
