@@ -105,13 +105,13 @@ const initialCards = [
   }
 ];
 
-// Карточки при открытии страницы
+
 const containerForCards = document.querySelector('.elements');
 const newCardForm = popupAddElement.querySelector('.popup__form');
 const cardTemplate = document.querySelector('.card-template');
 
 const createACard = (data) => {
-  const cardElement = cardTemplate.content.cloneNode(true);
+  const cardElement = cardTemplate.content.cloneNode(true).children[0];
 
   const nameCard = cardElement.querySelector('.element__title');
   const linkImageCard = cardElement.querySelector('.element__image');
@@ -138,4 +138,13 @@ const addNewCard = (event) => {
   renderCards(nameCard);
 };
 
+const deleteButtonCard = cardTemplate.querySelector('.element__trash-button');
+
+const deleteHandler = (event) => {
+  const target = event.target;
+  const currentElement = target.closest('.element');
+  currentElement.remove();
+}
+
 newCardForm.addEventListener('submit', addNewCard);
+deleteButtonCard.addEventListener('click', deleteHandler);
