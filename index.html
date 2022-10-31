@@ -41,6 +41,28 @@
             </form>
         </div>
     </div>
+    <div class="popup popup__add">
+        <div class="popup__container">
+            <button class="popup__button-close" type="reset" name="button-close"></button>
+            <h2 class="popup__title">Новое место</h2>
+            <form class="popup__form" name="popup-form">
+                <input class="popup__input popup__input-name-card" type="text" name="name-card" placeholder="Название" value="">
+                <input class="popup__input popup__input-link-image" type="text" name="link-image" placeholder="Ссылка на картинку" value="">
+                <button class="popup__button-submit" type="submit" name="button-submit" value="создать">Создать</button>
+            </form>
+        </div>
+    </div>
+
+    <template class="card-template">
+        <li class="element">
+            <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаево-Черкесия">
+            <button class="element__trash-button" type="button"></button>
+            <div class="element__card">
+                <h2 class="element__title"></h2>
+                <button class="element__like-button" type="button"></button>
+            </div>
+        </li>
+    </template>
     <script src="./scripts/index.js"></script>
 </body>
 </html>
