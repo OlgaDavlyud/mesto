@@ -106,7 +106,7 @@ const initialCards = [
   }
 ];
 
-
+// Создаем функциональность добавления и удаления карточек
 const containerForCards = document.querySelector('.elements');
 const newCardForm = popupAddElement.querySelector('.popup__form');
 const cardTemplate = document.querySelector('.card-template');
@@ -118,8 +118,31 @@ const createACard = (data) => {
   return cardElement;
 }
 
+
+const likeCard = (event) => {
+  const evtTarget = event.target;
+  const currentElement = evtTarget.closest('.element');
+  likeButtonCard.classList.toggle('.element__like-button:active');
+};
+
+const deleteHandler = (event) => {
+    const evtTarget = event.target;
+    const currentElement = evtTarget.closest('.element');
+    currentElement.remove();
+};
+
+const setEventListeners = (cardElement) => {
+  const deleteButtonCard = cardElement.querySelector('.element__trash-button');
+  deleteButtonCard.addEventListener('click', deleteHandler);
+
+  const likeButtonCard = cardElement.querySelector('.element__like-button');
+  likeButtonCard.addEventListener('click', likeCard);
+};
+
+
 const renderCards = (data) => {
   const cardElement = createACard(data);
+  setEventListeners(cardElement);
   containerForCards.prepend(cardElement);
 }
 
@@ -133,13 +156,6 @@ const addNewCard = (event) => {
 };
 
 
-const deleteButtonCard = document.querySelector('.element__trash-button');
 
-  const deleteHandler = function() {
-    const card = deleteButtonCard.closest('.element');
-    card.remove();
-  };
-
-
+//слушатели событий добавления и удаления карточек
 newCardForm.addEventListener('submit', addNewCard);
-deleteButtonCard.addEventListener('click', deleteHandler);
