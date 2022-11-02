@@ -119,12 +119,6 @@ const createACard = (data) => {
 }
 
 
-const likeCard = (event) => {
-  const evtTarget = event.target;
-  const currentElement = evtTarget.closest('.element');
-  likeButtonCard.classList.toggle('.element__like-button:active');
-};
-
 const deleteHandler = (event) => {
     const evtTarget = event.target;
     const currentElement = evtTarget.closest('.element');
@@ -136,9 +130,12 @@ const setEventListeners = (cardElement) => {
   deleteButtonCard.addEventListener('click', deleteHandler);
 
   const likeButtonCard = cardElement.querySelector('.element__like-button');
-  likeButtonCard.addEventListener('click', likeCard);
+  likeButtonCard.addEventListener('click', (event) => {
+    const evtTarget = event.target;
+    const currentElement = evtTarget.closest('.element');
+    likeButtonCard.classList.toggle('element__like-button-active');
+  });
 };
-
 
 const renderCards = (data) => {
   const cardElement = createACard(data);

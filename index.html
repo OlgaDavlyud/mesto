@@ -30,6 +30,7 @@
     <footer class="footer">
         <p class="footer__text">© 2022 Mesto Russia</p>
     </footer>
+    <!--Попап редактирования данных-->
     <div class="popup popup__edit">
         <div class="popup__container">
             <button class="popup__button-close" type="reset" name="button-close"></button>
@@ -41,6 +42,7 @@
             </form>
         </div>
     </div>
+    <!--Попап добавления карточек-->
     <div class="popup popup__add">
         <div class="popup__container">
             <button class="popup__button-close" type="reset" name="button-close"></button>
@@ -52,7 +54,15 @@
             </form>
         </div>
     </div>
-
+    <!--Попап отображения карточек-->
+    <div class="popup popup__show">
+        <div class="popup__show-container">
+            <button class="popup__button-close popup__show-button-close" type="reset" name="button-close"></button>
+            <img class="popup__show-image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg" alt="">
+            <p class="popup__show-name">горный Алтай</p>
+        </div>
+    </div>
+    <!--Разметка карточки-->
     <template class="card-template">
         <li class="element">
             <img class="element__image" alt="">
