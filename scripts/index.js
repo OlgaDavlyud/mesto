@@ -3,21 +3,23 @@
 // popups
 const popupEditElement = document.querySelector('.popup__edit');
 const popupAddElement = document.querySelector('.popup__add');
+const popupShowCard = document.querySelector('.popup__show');
 
 
-//popups open button
+//popups open buttons
 const popupButtonOpenEditElement = document.querySelector('.profile__edit-button');
 const popupButtonOpenAddElement = document.querySelector('.profile__add-button');
 
-//popup close button
+//popup close buttons
 const popupButtonCloseEditElement = popupEditElement.querySelector('.popup__button-close');
 const popupButtonCloseAddElement = popupAddElement.querySelector('.popup__button-close');
+const popupButtonCloseShowCard = popupShowCard.querySelector('.popup__show-button-close');
 
-// popups container
+// popups containers
 const formEditElement = popupEditElement.querySelector('.popup__container');
 const formAddElement = popupAddElement.querySelector('.popup__container');
 
-// popups input
+// popups inputs
 const nameInput = formEditElement.querySelector('.popup__input-profile-name');
 const jobInput = formEditElement.querySelector('.popup__input-profile-about-yourself');
 const nameCardInput = formAddElement.querySelector('.popup__input-name-card');
@@ -70,12 +72,15 @@ const closePopupAdd = function() {
   newCardForm.reset();
 }
 
+
 //Cлушатели событий
 popupButtonOpenEditElement.addEventListener('click', openPopupEdit);
 popupButtonCloseEditElement.addEventListener('click', closePopupEdit);
 formEditElement.addEventListener('submit', submitForm);
+
 popupButtonOpenAddElement.addEventListener('click', openPopupAdd);
 popupButtonCloseAddElement.addEventListener('click', closePopupAdd);
+
 
 
 //  Массив карточек
@@ -115,6 +120,7 @@ const createACard = (data) => {
   const cardElement = cardTemplate.content.cloneNode(true).children[0];
   const nameCard = cardElement.querySelector('.element__title').textContent = data.name;
   const linkImageCard = cardElement.querySelector('.element__image').src = data.link;
+  const altImageCard = cardElement.querySelector('.element__image').alt = data.name;
   return cardElement;
 }
 
@@ -153,6 +159,22 @@ const addNewCard = (event) => {
 };
 
 
-
-//слушатели событий добавления и удаления карточек
+//слушатель событий добавления карточек
 newCardForm.addEventListener('submit', addNewCard);
+
+
+// Попап просмотра карточек
+const card = document.querySelectorAll('.element');
+
+const openPopupShowCard = (event) => {
+  const evtTarget = event.target;
+  const currentElement = evtTarget.closest('.element');
+  popupShowCard.classList.add('popup_opened');
+};
+
+const closePopupShowCard = function () {
+  popupShowCard.classList.remove('popup_opened');
+};
+
+//popupOpenShowCard.addEventListener('click', openPopupShowCard);
+popupButtonCloseShowCard.addEventListener('click', closePopupShowCard);
