@@ -1,4 +1,4 @@
-.popup__show {
+.popup-show {
     background-color: rgba(0, 0, 0, 0.9);
     opacity: 0;
     visibility: hidden;

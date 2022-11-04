@@ -35,10 +35,10 @@
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__button-submit/popup__button-submit.css);
 
-@import url(../blocks/popup__show/popup__show.css);
-@import url(../blocks/popup__show/__show-container/popup__show-container.css);
-@import url(../blocks/popup__show/__show-button-close/popup__show-button-close.css);
-@import url(../blocks/popup__show/__show-image/popup__show-image.css);
-@import url(../blocks/popup__show/__show-name/popup__show-name.css);
+@import url(../blocks/popup-show/popup-show.css);
+@import url(../blocks/popup-show/__show-container/popup__show-container.css);
+@import url(../blocks/popup-show/__show-button-close/popup__show-button-close.css);
+@import url(../blocks/popup-show/__show-image/popup__show-image.css);
+@import url(../blocks/popup-show/__show-name/popup__show-name.css);
 
 @import url(../blocks/popup/_opened/popup_opened.css);

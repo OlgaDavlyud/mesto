@@ -1,9 +1,9 @@
 // Делаем выборку DOM элементов
 
 // popups
-const popupEditElement = document.querySelector('.popup__edit');
-const popupAddElement = document.querySelector('.popup__add');
-const popupShowCard = document.querySelector('.popup__show');
+const popupEditElement = document.querySelector('.popup-edit');
+const popupAddElement = document.querySelector('.popup-add');
+const popupShowCard = document.querySelector('.popup-show');
 
 
 //popups open buttons
