@@ -1,32 +1,66 @@
 // Делаем выборку DOM элементов для валидации
-const formElement = document.querySelector('.popup__form');
-const formInput = formElement.querySelector('.popup__input');
-const formError = formElement.querySelector(`.${formInput.id}-error-visible`);
+const form = document.querySelector('.popup__form');
 
 // Функция, которая добавляет класс с ошибкой
-const showInputError = (element, errorMessage) => {
-    element.classList.add('popup__error-visible');
-    formError.textContent = errorMessage;
-    element.classList.add('popup__input-type-error');
-  };
+const showInputError = (formElement, inputElement, errorMessage) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error-visible`);
 
-  // Функция, которая удаляет класс с ошибкой
-  const hideInputError = (element) => {
-    element.classList.remove('popup__error-visible');
-    element.classList.remove('popup__input-type-error');
-    formError.textContent = "";
-  };
+  inputElement.classList.add('popup__error-visible');
+  errorElement.textContent = errorMessage;
+  inputElement.classList.add('popup__input-type-error');
+};
 
-  // Функция, которая проверяет валидность поля
-  const isValid = () => {
-    if (!formInput.validity.valid) {
-      // Если поле не проходит валидацию, покажем ошибку
-      showInputError(formInput, formInput.validationMessage);
-    } else {
-      // Если проходит, скроем
-      hideInputError(formInput);
-    }
-  };
+// Функция, которая удаляет класс с ошибкой
+const hideInputError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error-visible`);
 
-  // Вызовем функцию isValid на каждый ввод символа
-  formInput.addEventListener('input', isValid);
+  inputElement.classList.remove('popup__error-visible');
+  inputElement.classList.remove('popup__input-type-error');
+  errorElement.textContent = "";
+};
+
+// Функция, которая проверяет валидность поля
+const checkInputValidity = (formElement, inputElement) => {
+  const isValid = inputElement.validity.valid;
+
+  if (!isValid) {
+     showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(formElement, inputElement);
+  }
+};
+
+//Функция, которая отвечает за бокировку кнопки
+const toggleButtonState = (inputList, buttonElement) => {
+  const hasInvalivInput = inputList.some(inputElement => !inputElement.validity.valid);
+
+  if (hasInvalivInput) {
+    buttonElement.setAttribute('disabled', true);
+    buttonElement.classList.add('popup__button-disabled');
+  } else {
+    buttonElement.removeAttribute('disabled');
+    buttonElement.classList.remove('popup__button-disabled');
+  }
+};
+
+//Функция которая обрабатывает все формы
+const setEventListeners = (formElement) => {
+  formElement.addEventListener('submit', (event) =>{
+    event.preventDefault();
+  });
+
+  const inputList = Array.from(form.querySelectorAll('.popup__input'));
+  const submitButton = form.querySelector('.popup__button-submit');
+
+  toggleButtonState(inputList, submitButton);
+
+  inputList.forEach(inputElement => {
+    inputElement.addEventListener('input', () => {
+      checkInputValidity(form, inputElement);
+      toggleButtonState(inputList, submitButton);
+    });
+  });
+};
+
+setEventListeners(form);
+
