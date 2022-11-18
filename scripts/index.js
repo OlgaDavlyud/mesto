@@ -173,3 +173,6 @@ newCardForm.addEventListener('submit', addNewCard);
 popupButtonCloseShowCard.addEventListener('click', function(){
   closePopup(popupShowCard);
 });
+
+
+enableValidation(selectors);
