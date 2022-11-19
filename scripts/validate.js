@@ -5,7 +5,7 @@ const showInputError = (formElement, inputElement, errorMessage) => {
   inputElement.classList.add(selectors.errorClass);
   errorElement.textContent = errorMessage;
   inputElement.classList.add(selectors.inputErrorClass);
-};
+}
 
 // Функция, которая удаляет класс с ошибкой
 const hideInputError = (formElement, inputElement) => {
@@ -14,7 +14,7 @@ const hideInputError = (formElement, inputElement) => {
   inputElement.classList.remove(selectors.errorClass);
   inputElement.classList.remove(selectors.inputErrorClass);
   errorElement.textContent = "";
-};
+}
 
 // Функция, которая проверяет валидность поля
 const checkInputValidity = (formElement, inputElement) => {
@@ -25,20 +25,21 @@ const checkInputValidity = (formElement, inputElement) => {
   } else {
     hideInputError(formElement, inputElement);
   }
-};
+}
 
 //Функция, которая отвечает за бокировку кнопки
 const toggleButtonState = (inputList, buttonElement) => {
-  const hasInvalivInput = inputList.some(inputElement => !inputElement.validity.valid);
+  const hasInvalidInput = inputList.some(inputElement => !inputElement.validity.valid);
 
-  if (hasInvalivInput) {
+  if (hasInvalidInput) {
     buttonElement.setAttribute('disabled', true);
     buttonElement.classList.add(selectors.inactiveButtonClass);
   } else {
     buttonElement.removeAttribute('disabled');
     buttonElement.classList.remove(selectors.inactiveButtonClass);
   }
-};
+}
+
 
 //Функция которая обрабатывает все формы
 const setEventListenersForm = (formElement, selectors) => {
@@ -57,7 +58,7 @@ const setEventListenersForm = (formElement, selectors) => {
       toggleButtonState(inputList, submitButton);
     });
   });
-};
+}
 
 
 //Функция которая включает валидацию всех форм
@@ -67,7 +68,7 @@ const enableValidation = (selectors) => {
   formList.forEach(formElement => {
     setEventListenersForm(formElement, selectors);
   });
-};
+}
 
 const selectors = {
   formSelector: '.popup__form',
@@ -76,5 +77,5 @@ const selectors = {
   inactiveButtonClass: 'popup__button-disabled',
   inputErrorClass: 'popup__input-type-error',
   errorClass: 'popup__error-visible'
-};
+}
 
