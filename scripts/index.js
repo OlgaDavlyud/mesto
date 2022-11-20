@@ -75,7 +75,7 @@ function submitForm(evt) {
 
 //Функция закрытия overlay
 const closePopupByClickOnOverlay = (event) => {
-  if (event.target !== event.currentTarget) {
+  if (event.target === event.currentTarget) {
     closePopup(popupEditElement);
     closePopup(popupAddElement);
     closePopup(popupShowCard);
