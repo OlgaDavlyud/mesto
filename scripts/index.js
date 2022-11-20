@@ -41,11 +41,13 @@ const submitBottonEdit = popupEditElement.querySelector('.popup__button-submit')
 //Создаем функции для открытия и закрытия окон редактирования и добавления
 const openPopup = function (popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keyup', closePopupByClickOnEsc);
 }
 
 
 const closePopup = function (popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keyup', closePopupByClickOnEsc);
 }
 
 
@@ -73,20 +75,22 @@ function submitForm(evt) {
 
 //Функция закрытия overlay
 const closePopupByClickOnOverlay = (event) => {
-  if (event.target !== event.currentTarget) {
-    return;
-  }
+  if (event.target === event.currentTarget) {
     closePopup(popupEditElement);
     closePopup(popupAddElement);
     closePopup(popupShowCard);
+  }
 };
 
-//Слушатели попаповxs для закрытия overlay
-popupEditElement.addEventListener('click', closePopupByClickOnOverlay);
-popupAddElement.addEventListener('click', closePopupByClickOnOverlay);
-popupShowCard.addEventListener('click', closePopupByClickOnOverlay);
 
+//Функция закрытия Esc
+const closePopupByClickOnEsc = (event) => {
+  const openPopup = document.querySelector('.popup_opened');
 
+  if (event.key === 'Escape') {
+    closePopup(openPopup);
+  }
+};
 
 //Cлушатели событий для окон редактирования и добавления
 popupButtonOpenEditElement.addEventListener('click', function() {
@@ -119,6 +123,11 @@ popupButtonCloseAddElement.addEventListener('click', function() {
   closePopup(popupAddElement);
   newCardForm.reset();
 });
+
+//Слушатели попапов для закрытия overlay
+popupEditElement.addEventListener('click', closePopupByClickOnOverlay);
+popupAddElement.addEventListener('click', closePopupByClickOnOverlay);
+popupShowCard.addEventListener('click', closePopupByClickOnOverlay);
 
 
 // Добавление и удаление карточек
