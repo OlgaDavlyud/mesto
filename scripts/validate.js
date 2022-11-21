@@ -1,4 +1,4 @@
-// Функция, которая добавляет класс с ошибкой
+// Функция, которая показывает ошибку
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error-visible`);
 
@@ -7,7 +7,7 @@ const showInputError = (formElement, inputElement, errorMessage) => {
   inputElement.classList.add(selectors.inputErrorClass);
 }
 
-// Функция, которая удаляет класс с ошибкой
+// Функция, которая скрывает ошибку
 const hideInputError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error-visible`);
 
@@ -15,6 +15,19 @@ const hideInputError = (formElement, inputElement) => {
   inputElement.classList.remove(selectors.inputErrorClass);
   errorElement.textContent = "";
 }
+
+//Функция очистки ошибок при открытии попапов
+const hideInputErrorOpeningPopup = () => {
+  const formList = Array.from(document.querySelectorAll(selectors.formSelector));
+
+  formList.forEach(formElement => {
+    const inputList = Array.from(formElement.querySelectorAll(selectors.inputSelector));
+
+    inputList.forEach(inputElement => {
+      hideInputError(formElement, inputElement);
+    });
+  });
+};
 
 // Функция, которая проверяет валидность поля
 const checkInputValidity = (formElement, inputElement) => {
@@ -40,6 +53,11 @@ const toggleButtonState = (inputList, buttonElement) => {
   }
 }
 
+//Функция disabled button submit
+const disabledButtonState = (buttonElement) => {
+  buttonElement.setAttribute('disabled', true);
+  buttonElement.classList.add(selectors.inactiveButtonClass);
+}
 
 //Функция которая обрабатывает все формы
 const setEventListenersForm = (formElement, selectors) => {
@@ -60,7 +78,6 @@ const setEventListenersForm = (formElement, selectors) => {
   });
 }
 
-
 //Функция которая включает валидацию всех форм
 const enableValidation = (selectors) => {
   const formList = Array.from(document.querySelectorAll(selectors.formSelector));
@@ -78,4 +95,3 @@ const selectors = {
   inputErrorClass: 'popup__input-type-error',
   errorClass: 'popup__error-visible'
 }
-
