@@ -89,7 +89,7 @@ popupButtonOpenEditElement.addEventListener('click', function() {
   disabledButtonState(submitBottonEdit);
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
-  hideInputErrorOpeningPopup();
+  hideInputErrorOpeningPopup(popupEditElement);
 });
 
 popupButtonCloseEditElement.addEventListener('click', function() {
@@ -102,7 +102,7 @@ formEditElement.addEventListener('submit', submitEditProfileForm);
 popupButtonOpenAddElement.addEventListener('click', function() {
   openPopup(popupAddElement);
   disabledButtonState(submitBottonAdd);
-  hideInputErrorOpeningPopup();
+  hideInputErrorOpeningPopup(popupAddElement);
 });
 
 popupButtonCloseAddElement.addEventListener('click', function() {

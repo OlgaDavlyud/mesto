@@ -17,7 +17,7 @@ const hideInputError = (formElement, inputElement) => {
 }
 
 //Функция очистки ошибок при открытии попапов
-const hideInputErrorOpeningPopup = () => {
+const hideInputErrorOpeningPopup = (formElement) => {
   const formList = Array.from(document.querySelectorAll(selectors.formSelector));
 
   formList.forEach(formElement => {
