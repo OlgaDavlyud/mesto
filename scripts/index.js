@@ -127,8 +127,9 @@ const showAltBigImage = popupShowCard.querySelector('.popup__show-image');
 const createCard = (data) => {
   const cardElement = cardTemplate.content.cloneNode(true);
   const nameCard = cardElement.querySelector('.element__title').textContent = data.name;
-  const linkImageCard = cardElement.querySelector('.element__image').src = data.link;
-  const altImageCard = cardElement.querySelector('.element__image').alt = data.name;
+  const imageElement = cardElement.querySelector('.element__image');
+  imageElement.src = data.link;
+  imageElement.alt = data.name;
   setEventListeners(cardElement);
   return cardElement;
 };
