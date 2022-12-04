@@ -1,3 +1,7 @@
+//class FormValidator {
+//  constructor ()
+//}
+
 // Функция, которая показывает ошибку
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error-visible`);

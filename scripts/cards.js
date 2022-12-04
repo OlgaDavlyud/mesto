@@ -1,5 +1,5 @@
 //  Массив карточек
-const initialCards = [
+export const initialCards = [
     {
       name: 'Дубай',
       link: 'https://images.unsplash.com/photo-1642369455174-9a3b9f89becd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2487&q=80'
