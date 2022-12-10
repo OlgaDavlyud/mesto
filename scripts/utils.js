@@ -43,7 +43,7 @@ export const closePopupByClickOnOverlay = (event) => {
         closePopup(popupElement);
        };
     });
-};
+}
 
 //Функция закрытия Esc
 export const closePopupByClickOnEsc = (event) => {
@@ -51,4 +51,13 @@ export const closePopupByClickOnEsc = (event) => {
       const openedPopup = document.querySelector('.popup_opened');
       closePopup(openedPopup);
     }
-};
+}
+
+// //Функция добавления новой карточки
+// export const addNewCard = (event) => {
+//     event.preventDefault();
+//     const newData = {name: nameCardInput.value, link: linkImageInput.value};
+//     generateCard(newData)
+//     closePopup(popupAddElement)
+//     newCardForm.reset();
+// };
