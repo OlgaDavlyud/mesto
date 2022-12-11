@@ -1,6 +1,6 @@
 import Card from './Card.js';
 import { initialCards } from './cards.js';
-import { popupEditElement, popupAddElement, popupShowCard, popupButtonOpenEditElement, popupButtonOpenAddElement, popupButtonCloseEditElement, popupButtonCloseAddElement, popupButtonCloseShowCard, formEditElement, editForm, newCardForm, nameInput, jobInput, nameProfile, jobProfile, submitBottonEdit, submitBottonAdd } from './constants.js';
+import { popupEditElement, popupAddElement, popupShowCard, popupButtonOpenEditElement, popupButtonOpenAddElement, popupButtonCloseEditElement, popupButtonCloseAddElement, popupButtonCloseShowCard, formEditElement, editForm, newCardForm, nameInput, jobInput, nameProfile, jobProfile, containerForCards, nameCardInput, linkImageInput } from './constants.js';
 import { openPopup, closePopup, submitEditProfileForm, closePopupByClickOnOverlay } from './utils.js';
 //import FormValidator from './FormValidator.js';
 
@@ -45,19 +45,31 @@ popupButtonCloseShowCard.addEventListener('click', function(){
  closePopup(popupShowCard);
 });
 
-//Отрисовка карточек
-initialCards.forEach((item) => {
-  const card = new Card(item, '.card-template', openPopup);
-  const cardElement = card.generateCard();
+// Отрисовка карточек
 
-  document.querySelector('.elements').prepend(cardElement);
-});
+const createCard = (data) => {
+  const card = new Card(data, '.card-template', openPopup);
+  return card.generateCard();
+}
+
+const renderCard = (data) => {
+  const cardElement = createCard(data);
+  containerForCards.prepend(cardElement);
+}
+
+initialCards.forEach(renderCard)
+
+//Функция добавления новой карточки
+const addNewCard = (event) => {
+  event.preventDefault();
+  const newData = {name: nameCardInput.value, link: linkImageInput.value};
+  renderCard(newData)
+  closePopup(popupAddElement)
+  newCardForm.reset();
+}
 
 //Слушатель добавления новых карточек
-// newCardForm.addEventListener('submit', addNewCard);
+newCardForm.addEventListener('submit', addNewCard);
 
 //Валидация форм
 //enableValidation(selectors);
-
-//  = new FormValidator(selectors, form);
-// ... = ... .enableValidation();

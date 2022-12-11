@@ -1,4 +1,4 @@
-import { selectors } from "./constants.js";
+//import { selectors } from "./constants.js";
 
 export default class FormValidator {
   constructor (selectors, form) {
@@ -177,11 +177,11 @@ export default class FormValidator {
   // });
 // }
 
-// // const selectors = {
-// //   formSelector: '.popup__form',
-// //   inputSelector: '.popup__input',
-// //   submitButtonSelector: '.popup__button-submit',
-// //   inactiveButtonClass: 'popup__button-disabled',
-// //   inputErrorClass: 'popup__input-type-error',
-// //   errorClass: 'popup__error-visible'
-// // }
+const selectors = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button-submit',
+  inactiveButtonClass: 'popup__button-disabled',
+  inputErrorClass: 'popup__input-type-error',
+  errorClass: 'popup__error-visible'
+}

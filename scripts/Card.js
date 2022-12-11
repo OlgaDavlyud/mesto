@@ -8,6 +8,7 @@ export default class Card {
         this._openPopup = openPopup;
     }
 
+    //метод клонирования разметки из темплейта
     _getTemplate() {
         const cardElement = document.querySelector(this._templateSelector)
         .content.querySelector('.element')
@@ -16,6 +17,7 @@ export default class Card {
         return cardElement;
     }
 
+    //метод like
     _likeHandler = () => {
         this._likeButtonCard = this._element.querySelector('.element__like-button');
         this._likeButtonCard.addEventListener('click', () => {
@@ -23,6 +25,7 @@ export default class Card {
       });
     };
 
+    //метод удаления
     _deleteHandler = () => {
         this._deleteButtonCard = this._element.querySelector('.element__trash-button');
         this._deleteButtonCard.addEventListener('click', () => {
@@ -30,6 +33,7 @@ export default class Card {
       });
     }
 
+    //демонстрация картинки
     _showImageCardHandler = () => {
         this._bigImage = this._element.querySelector('.element__image');
         this._bigImage.addEventListener('click', () => {
@@ -41,12 +45,14 @@ export default class Card {
       });
     }
 
+    //метод который навешивает все другие методы
     _setEventListeners = () => {
         this._likeHandler();
         this._deleteHandler();
         this._showImageCardHandler();
     }
 
+    //метод создания готовой карточки
     generateCard() {
         this._element = this._getTemplate();
         this._setEventListeners();
@@ -58,26 +64,3 @@ export default class Card {
         return this._element;
       }
 }
-
-// Добавление, удаление и просмотр карточек
-
-//Функция которая отрисовывает карточку
-//const renderCard = (data) => {
-//  const cardElement = createCard(data);
-//  containerForCards.prepend(cardElement);
-//};
-
-//Отрисовка всех карточек из массива
-//initialCards.forEach(renderCard);
-
-//Функция добавления новой карточки
-//const addNewCard = (event) => {
-//  event.preventDefault();
-//  const newData = {name: nameCardInput.value, link: linkImageInput.value};
-//  renderCard(newData);
-//  closePopup(popupAddElement)
-//  newCardForm.reset();
-//};
-
-//Слушатель добавления новых карточек
-//newCardForm.addEventListener('submit', addNewCard);

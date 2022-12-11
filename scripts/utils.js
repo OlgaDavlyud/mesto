@@ -52,12 +52,3 @@ export const closePopupByClickOnEsc = (event) => {
       closePopup(openedPopup);
     }
 }
-
-// //Функция добавления новой карточки
-// export const addNewCard = (event) => {
-//     event.preventDefault();
-//     const newData = {name: nameCardInput.value, link: linkImageInput.value};
-//     generateCard(newData)
-//     closePopup(popupAddElement)
-//     newCardForm.reset();
-// };

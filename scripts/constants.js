@@ -37,6 +37,9 @@ export const submitBottonAdd = popupAddElement.querySelector('.popup__button-sub
 export const bigShowImageCard = popupShowCard.querySelector('.popup__show-image');
 export const showNameBigImage = popupShowCard.querySelector('.popup__show-name');
 
+// контейнер для карточек
+export const containerForCards = document.querySelector('.elements');
+
 // selectors
 export const selectors = {
     formSelector: '.popup__form',
