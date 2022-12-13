@@ -1,20 +1,13 @@
 import Card from './Card.js';
 import { initialCards } from './cards.js';
-import { popupEditElement, popupAddElement, popupShowCard, popupButtonOpenEditElement, popupButtonOpenAddElement, popupButtonCloseEditElement, popupButtonCloseAddElement, popupButtonCloseShowCard, formEditElement, editForm, newCardForm, nameInput, jobInput, nameProfile, jobProfile, containerForCards, nameCardInput, linkImageInput, selectors } from './constants.js';
+import { popupEditElement, popupAddElement, popupShowCard, popupButtonOpenEditElement, popupButtonOpenAddElement, popupButtonCloseEditElement, popupButtonCloseAddElement, popupButtonCloseShowCard, formEditElement, editForm, newCardForm, nameInput, jobInput, nameProfile, jobProfile, containerForCards, nameCardInput, linkImageInput, selectors, submitButtonEdit, submitButtonAdd } from './constants.js';
 import { openPopup, closePopup, submitEditProfileForm, closePopupByClickOnOverlay } from './utils.js';
 import FormValidator from './FormValidator.js';
-
-//Валидация форм
-const validityEditForm = new FormValidator(selectors, editForm);
-validityEditForm.enableValidation();
-
-const validityNewForm = new FormValidator(selectors, newCardForm);
-validityNewForm.enableValidation();
 
 //Слушатель открытия окна редактирования данных
 popupButtonOpenEditElement.addEventListener('click', function() {
   openPopup(popupEditElement);
-  //disabledButtonState(submitBottonEdit);
+  validityEditForm.disabledButtonState(submitButtonEdit);
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
   validityEditForm.hideInputErrorOpeningPopup();
@@ -32,7 +25,7 @@ formEditElement.addEventListener('submit', submitEditProfileForm);
 //Слушатель открытия окна добавления карточек
 popupButtonOpenAddElement.addEventListener('click', function() {
   openPopup(popupAddElement);
-  //disabledButtonState(submitBottonAdd);
+  validityNewForm.disabledButtonState(submitButtonAdd);
   validityNewForm.hideInputErrorOpeningPopup()
 });
 
@@ -53,7 +46,6 @@ popupButtonCloseShowCard.addEventListener('click', function(){
 });
 
 // Отрисовка карточек
-
 const createCard = (data) => {
   const card = new Card(data, '.card-template', openPopup);
   return card.generateCard();
@@ -77,3 +69,10 @@ const addNewCard = (event) => {
 
 //Слушатель добавления новых карточек
 newCardForm.addEventListener('submit', addNewCard);
+
+//Валидация форм
+const validityEditForm = new FormValidator(selectors, editForm);
+validityEditForm.enableValidation();
+
+const validityNewForm = new FormValidator(selectors, newCardForm);
+validityNewForm.enableValidation();

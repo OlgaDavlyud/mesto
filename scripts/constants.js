@@ -30,8 +30,8 @@ export const nameProfile = profileElement.querySelector('.profile__name');
 export const jobProfile = profileElement.querySelector('.profile__about-yourself');
 
 // popup submit button
-export const submitBottonEdit = popupEditElement.querySelector('.popup__button-submit');
-export const submitBottonAdd = popupAddElement.querySelector('.popup__button-submit');
+export const submitButtonEdit = popupEditElement.querySelector('.popup__button-submit');
+export const submitButtonAdd = popupAddElement.querySelector('.popup__button-submit');
 
 // popup-show elements
 export const bigShowImageCard = popupShowCard.querySelector('.popup__show-image');
@@ -49,5 +49,3 @@ export const selectors = {
     inputErrorClass: 'popup__input-type-error',
     errorClass: 'popup__error-visible'
   }
-
-export const formList = Array.from(document.querySelectorAll(selectors.formSelector));
