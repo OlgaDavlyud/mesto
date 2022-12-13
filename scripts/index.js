@@ -4,13 +4,20 @@ import { popupEditElement, popupAddElement, popupShowCard, popupButtonOpenEditEl
 import { openPopup, closePopup, submitEditProfileForm, closePopupByClickOnOverlay } from './utils.js';
 import FormValidator from './FormValidator.js';
 
+//Валидация форм
+const validityEditForm = new FormValidator(selectors, editForm);
+validityEditForm.enableValidation();
+
+const validityNewForm = new FormValidator(selectors, newCardForm);
+validityNewForm.enableValidation();
+
 //Слушатель открытия окна редактирования данных
 popupButtonOpenEditElement.addEventListener('click', function() {
   openPopup(popupEditElement);
   //disabledButtonState(submitBottonEdit);
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
-  //hideInputErrorOpeningPopup(popupEditElement);
+  validityEditForm.hideInputErrorOpeningPopup();
 });
 
 //Слушатель закрытия окна редактирования данных
@@ -26,7 +33,7 @@ formEditElement.addEventListener('submit', submitEditProfileForm);
 popupButtonOpenAddElement.addEventListener('click', function() {
   openPopup(popupAddElement);
   //disabledButtonState(submitBottonAdd);
-  //hideInputErrorOpeningPopup(popupAddElement);
+  validityNewForm.hideInputErrorOpeningPopup()
 });
 
 //Слушатель закрытия окна добавления карточек
@@ -70,17 +77,3 @@ const addNewCard = (event) => {
 
 //Слушатель добавления новых карточек
 newCardForm.addEventListener('submit', addNewCard);
-
-//Валидация форм
-const ValidityStateEditForm = (selectors) => {
-  const validityForm = new FormValidator(selectors, editForm);
-  validityForm.enableValidation();
-}
-
-const ValidityStateNewCardForm = (selectors) => {
-  const validityForm = new FormValidator(selectors, newCardForm);
-  validityForm.enableValidation();
-}
-
-ValidityStateEditForm(selectors);
-ValidityStateNewCardForm(selectors);
