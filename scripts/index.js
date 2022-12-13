@@ -1,8 +1,8 @@
 import Card from './Card.js';
 import { initialCards } from './cards.js';
-import { popupEditElement, popupAddElement, popupShowCard, popupButtonOpenEditElement, popupButtonOpenAddElement, popupButtonCloseEditElement, popupButtonCloseAddElement, popupButtonCloseShowCard, formEditElement, editForm, newCardForm, nameInput, jobInput, nameProfile, jobProfile, containerForCards, nameCardInput, linkImageInput } from './constants.js';
+import { popupEditElement, popupAddElement, popupShowCard, popupButtonOpenEditElement, popupButtonOpenAddElement, popupButtonCloseEditElement, popupButtonCloseAddElement, popupButtonCloseShowCard, formEditElement, editForm, newCardForm, nameInput, jobInput, nameProfile, jobProfile, containerForCards, nameCardInput, linkImageInput, selectors } from './constants.js';
 import { openPopup, closePopup, submitEditProfileForm, closePopupByClickOnOverlay } from './utils.js';
-//import FormValidator from './FormValidator.js';
+import FormValidator from './FormValidator.js';
 
 //Слушатель открытия окна редактирования данных
 popupButtonOpenEditElement.addEventListener('click', function() {
@@ -53,8 +53,8 @@ const createCard = (data) => {
 }
 
 const renderCard = (data) => {
-  const cardElement = createCard(data);
-  containerForCards.prepend(cardElement);
+  const card = createCard(data);
+  containerForCards.prepend(card);
 }
 
 initialCards.forEach(renderCard)
@@ -72,4 +72,15 @@ const addNewCard = (event) => {
 newCardForm.addEventListener('submit', addNewCard);
 
 //Валидация форм
-//enableValidation(selectors);
+const ValidityStateEditForm = (selectors) => {
+  const validityForm = new FormValidator(selectors, editForm);
+  validityForm.enableValidation();
+}
+
+const ValidityStateNewCardForm = (selectors) => {
+  const validityForm = new FormValidator(selectors, newCardForm);
+  validityForm.enableValidation();
+}
+
+ValidityStateEditForm(selectors);
+ValidityStateNewCardForm(selectors);

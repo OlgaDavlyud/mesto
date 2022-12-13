@@ -23,7 +23,7 @@ export default class Card {
         this._likeButtonCard.addEventListener('click', () => {
           this._likeButtonCard.classList.toggle('element__like-button-active');
       });
-    };
+    }
 
     //метод удаления
     _deleteHandler = () => {

@@ -1,4 +1,5 @@
 import { popupEditElement, nameInput, jobInput, nameProfile, jobProfile } from './constants.js';
+import Card from './Card.js';
 
 //Функции open popup
 export function openPopup(popup) {

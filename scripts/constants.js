@@ -40,7 +40,7 @@ export const showNameBigImage = popupShowCard.querySelector('.popup__show-name')
 // контейнер для карточек
 export const containerForCards = document.querySelector('.elements');
 
-// selectors
+// переменные для валидации
 export const selectors = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
@@ -49,3 +49,5 @@ export const selectors = {
     inputErrorClass: 'popup__input-type-error',
     errorClass: 'popup__error-visible'
   }
+
+export const formList = Array.from(document.querySelectorAll(selectors.formSelector));
