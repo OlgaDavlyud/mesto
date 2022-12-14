@@ -29,10 +29,6 @@ export const profileElement = document.querySelector('.profile__info');
 export const nameProfile = profileElement.querySelector('.profile__name');
 export const jobProfile = profileElement.querySelector('.profile__about-yourself');
 
-// popup submit button
-export const submitButtonEdit = popupEditElement.querySelector('.popup__button-submit');
-export const submitButtonAdd = popupAddElement.querySelector('.popup__button-submit');
-
 // popup-show elements
 export const bigShowImageCard = popupShowCard.querySelector('.popup__show-image');
 export const showNameBigImage = popupShowCard.querySelector('.popup__show-name');

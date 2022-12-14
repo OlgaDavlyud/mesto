@@ -1,13 +1,13 @@
 import Card from './Card.js';
 import { initialCards } from './cards.js';
-import { popupEditElement, popupAddElement, popupShowCard, popupButtonOpenEditElement, popupButtonOpenAddElement, popupButtonCloseEditElement, popupButtonCloseAddElement, popupButtonCloseShowCard, formEditElement, editForm, newCardForm, nameInput, jobInput, nameProfile, jobProfile, containerForCards, nameCardInput, linkImageInput, selectors, submitButtonEdit, submitButtonAdd } from './constants.js';
+import { popupEditElement, popupAddElement, popupShowCard, popupButtonOpenEditElement, popupButtonOpenAddElement, popupButtonCloseEditElement, popupButtonCloseAddElement, popupButtonCloseShowCard, formEditElement, editForm, newCardForm, nameInput, jobInput, nameProfile, jobProfile, containerForCards, nameCardInput, linkImageInput, selectors } from './constants.js';
 import { openPopup, closePopup, submitEditProfileForm, closePopupByClickOnOverlay } from './utils.js';
 import FormValidator from './FormValidator.js';
 
 //Слушатель открытия окна редактирования данных
 popupButtonOpenEditElement.addEventListener('click', function() {
   openPopup(popupEditElement);
-  validityEditForm.disabledButtonState(submitButtonEdit);
+  validityEditForm.disabledButtonState();
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
   validityEditForm.hideInputErrorOpeningPopup();
@@ -16,7 +16,6 @@ popupButtonOpenEditElement.addEventListener('click', function() {
 //Слушатель закрытия окна редактирования данных
 popupButtonCloseEditElement.addEventListener('click', function() {
   closePopup(popupEditElement);
-  editForm.reset();
 });
 
 //Слушатель сохранения отредактированных данных
@@ -25,14 +24,14 @@ formEditElement.addEventListener('submit', submitEditProfileForm);
 //Слушатель открытия окна добавления карточек
 popupButtonOpenAddElement.addEventListener('click', function() {
   openPopup(popupAddElement);
-  validityNewForm.disabledButtonState(submitButtonAdd);
+  validityNewForm.disabledButtonState();
   validityNewForm.hideInputErrorOpeningPopup()
+  newCardForm.reset();
 });
 
 //Слушатель закрытия окна добавления карточек
 popupButtonCloseAddElement.addEventListener('click', function() {
   closePopup(popupAddElement);
-  newCardForm.reset();
 });
 
 //Слушатели попапов для закрытия overlay
@@ -46,6 +45,12 @@ popupButtonCloseShowCard.addEventListener('click', function(){
 });
 
 // Отрисовка карточек
+// function handleCardClick(name, link) {
+//   link = this._link;
+//   name = this._name;
+//   openPopup(popup);
+// }
+
 const createCard = (data) => {
   const card = new Card(data, '.card-template', openPopup);
   return card.generateCard();
