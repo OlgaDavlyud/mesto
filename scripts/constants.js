@@ -3,14 +3,11 @@ export const popupEditElement = document.querySelector('.popup-edit');
 export const popupAddElement = document.querySelector('.popup-add');
 export const popupShowCard = document.querySelector('.popup-show');
 
+export const popups = document.querySelectorAll('.popup');
+
 //popups open buttons
 export const popupButtonOpenEditElement = document.querySelector('.profile__edit-button');
 export const popupButtonOpenAddElement = document.querySelector('.profile__add-button');
-
-//popup close buttons
-export const popupButtonCloseEditElement = popupEditElement.querySelector('.popup__button-close');
-export const popupButtonCloseAddElement = popupAddElement.querySelector('.popup__button-close');
-export const popupButtonCloseShowCard = popupShowCard.querySelector('.popup__show-button-close');
 
 // popups контейнеры и формы
 export const formEditElement = popupEditElement.querySelector('.popup__container');

@@ -29,13 +29,6 @@ export default class FormValidator {
     errorElement.textContent = "";
   };
 
-  //Функция очистки ошибок при открытии попапов
-  hideInputErrorOpeningPopup() {
-    this._inputList.forEach((inputElement) => {
-      this._hideInputError(inputElement);
-    });
-  }
-
   // Функция, которая проверяет валидность поля
   _checkInputValidity(inputElement) {
     const isValid = inputElement.validity.valid;
@@ -47,16 +40,25 @@ export default class FormValidator {
     }
   }
 
-  //Функция, которая отвечает за бокировку кнопки
-  _toggleButtonState(buttonElement) {
+  // Функция, которая отвечает за бокировку кнопки
+  _toggleButtonState() {
     const hasInvalidInput = this._inputList.some(inputElement => !inputElement.validity.valid);
 
     if (hasInvalidInput) {
       this.disabledButtonState();
     } else {
-      buttonElement.removeAttribute('disabled');
-      buttonElement.classList.remove(this._inactiveButtonClass);
+      this._submitButton.removeAttribute('disabled');
+      this._submitButton.classList.remove(this._inactiveButtonClass);
     }
+  }
+
+  // Функция, которая очищает ошибки и управляет кнопкой
+  resetValidation() {
+    this._toggleButtonState();
+
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement)
+    });
   }
 
   //Функция disabled button submit
@@ -71,12 +73,12 @@ export default class FormValidator {
       event.preventDefault();
     });
 
-    this._toggleButtonState(this._submitButton);
+    this._toggleButtonState();
 
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState(this._submitButton);
+        this._toggleButtonState();
       });
     });
   }

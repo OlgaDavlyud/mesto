@@ -1,5 +1,4 @@
 import { popupEditElement, nameInput, jobInput, nameProfile, jobProfile } from './constants.js';
-import Card from './Card.js';
 
 //Функции open popup
 export function openPopup(popup) {
@@ -33,17 +32,6 @@ export function submitEditProfileForm(evt) {
     changeName();
     changeAboutYourself();
     closePopup(popupEditElement);
-}
-
-//Функция закрытия overlay
-export const closePopupByClickOnOverlay = (event) => {
-    const popupElement = Array.from(document.querySelectorAll('.popup'));
-
-    popupElement.forEach(popupElement => {
-      if (event.target === event.currentTarget) {
-        closePopup(popupElement);
-       };
-    });
 }
 
 //Функция закрытия Esc

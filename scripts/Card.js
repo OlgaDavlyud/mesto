@@ -1,11 +1,9 @@
-import { popupShowCard, bigShowImageCard, showNameBigImage } from './constants.js';
-
 export default class Card {
-    constructor(data, templateSelector, openPopup) {
+    constructor(data, templateSelector, handleCardClick) {
         this._link = data.link;
         this._name = data.name;
         this._templateSelector = templateSelector;
-        this._openPopup = openPopup;
+        this._handleCardClick = handleCardClick;
     }
 
     //метод клонирования разметки из темплейта
@@ -33,15 +31,12 @@ export default class Card {
       });
     }
 
-    //демонстрация картинки
+    // //демонстрация картинки
     _setShowImageCardHandler = () => {
-        this._imageElement = this._element.querySelector('.element__image');
-        this._imageElement.addEventListener('click', () => {
-          bigShowImageCard.src = this._link;
-          bigShowImageCard.alt = this._name;
-          showNameBigImage.textContent = this._name;
-          this._openPopup(popupShowCard);
-      });
+      this._imageElement = this._element.querySelector('.element__image');
+      this._imageElement.addEventListener('click', () => {
+        this._handleCardClick(this._name, this._link);
+      })
     }
 
     //метод который навешивает все другие методы
