@@ -1,72 +1,76 @@
-import Card from './Card.js';
-import { initialCards } from './cards.js';
-import { popups, popupEditElement, popupAddElement, popupShowCard, popupButtonOpenEditElement, popupButtonOpenAddElement, formEditElement, editForm, newCardForm, nameInput, jobInput, nameProfile, jobProfile, containerForCards, nameCardInput, linkImageInput, bigShowImageCard, showNameBigImage, selectors } from './constants.js';
-import { openPopup, closePopup, submitEditProfileForm } from './utils.js';
-import FormValidator from './FormValidator.js';
+import Card from './components/Card.js';
+import { initialCards } from './utils/cards.js';
+import { popups, popupEditElement, popupAddElement, popupShowCard, popupButtonOpenEditElement, popupButtonOpenAddElement, formEditElement, editForm, newCardForm, nameInput, jobInput, nameProfile, jobProfile, selectors } from './utils/constants.js';
+// import { openPopup, closePopup, handleCardClick } from './utils/utils.js';
+import FormValidator from './components/FormValidator.js';
+import Section from './components/Section.js';
+import PopupWithForm from './components/PopupWithForm.js';
+import UserInfo from './components/UserInfo.js';
+import PopupWithImage from './components/PopupWithImage.js';
 
-//Слушатель открытия окна редактирования данных
-popupButtonOpenEditElement.addEventListener('click', function() {
-  openPopup(popupEditElement);
-  nameInput.value = nameProfile.textContent;
-  jobInput.value = jobProfile.textContent;
+//const popupTest = new PopupWithForm(popupEditElement, submitFormTest);
+
+// function submitForm () {
+//   renderCard(data);
+// }
+
+const userInfo = new UserInfo({ nameProfile: nameProfile, jobProfile: jobProfile });
+
+const popupTestAdd = new PopupWithForm(popupAddElement, renderCard);
+
+const popupTestEdit = new PopupWithForm(popupEditElement, submitEditProfileForm);
+
+function openPopupEdit() {
+  popupTestEdit.open();
+  const userData = userInfo.getUserInfo();
+  nameInput.value = userData.name;
+  jobInput.value = userData.job;
   validityEditForm.resetValidation();
   validityEditForm.disabledButtonState();
-});
+}
 
-//Слушатель сохранения отредактированных данных
-formEditElement.addEventListener('submit', submitEditProfileForm);
+function submitEditProfileForm(data) {
+  userInfo.setUserInfo(data);
+}
+
+function handleCardClick (name, link) {
+  popupShowCardTest.open(name, link);
+}
+
+//Слушатель открытия окна редактирования данных
+popupButtonOpenEditElement.addEventListener('click', openPopupEdit);
+
+// //Слушатель сохранения отредактированных данных
+// formEditElement.addEventListener('submit', submitEditProfileForm);
 
 //Слушатель открытия окна добавления карточек
 popupButtonOpenAddElement.addEventListener('click', function() {
-  openPopup(popupAddElement);
+  popupTestAdd.open();
   validityNewForm.resetValidation();
-  newCardForm.reset();
 });
 
-//Закрытие попапов нажатием на кнопку и overlay
-popups.forEach((popup) => {
-    popup.addEventListener('mousedown', (evt) => {
-        if (evt.target.classList.contains('popup_opened')) {
-          closePopup(popup)
-        }
-        if (evt.target.classList.contains('popup__button-close')) {
-          closePopup(popup)
-        }
-    })
-})
-
-// Отрисовка карточек
-const createCard = (data) => {
+function createCard (data) {
   const card = new Card(data, '.card-template', handleCardClick);
   return card.generateCard();
 }
 
-const renderCard = (data) => {
-  const card = createCard(data);
-  containerForCards.prepend(card);
+function renderCard (data) {
+  const cardElement = createCard(data);
+  intialCardList.addItem(cardElement);
 }
 
-initialCards.forEach(renderCard)
+// Отрисовка карточек
+const intialCardList = new Section ({
+  items: initialCards,
+  renderer: renderCard
+},
+'.elements'
+);
 
-// Функция открытия карточки
-function handleCardClick (name, link) {
-  bigShowImageCard.src = link;
-  bigShowImageCard.alt = name;
-  showNameBigImage.textContent = name;
-  openPopup(popupShowCard)
-}
+intialCardList.renderItems();
 
-//Функция добавления новой карточки
-const addNewCard = (event) => {
-  event.preventDefault();
-  const newData = {name: nameCardInput.value, link: linkImageInput.value};
-  renderCard(newData)
-  closePopup(popupAddElement)
-  newCardForm.reset();
-}
+const popupShowCardTest = new PopupWithImage(popupShowCard);
 
-//Слушатель добавления новых карточек
-newCardForm.addEventListener('submit', addNewCard);
 
 //Валидация форм
 const validityEditForm = new FormValidator(selectors, editForm);
