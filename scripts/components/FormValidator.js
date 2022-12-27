@@ -61,13 +61,13 @@ export default class FormValidator {
     });
   }
 
-  //Функция disabled button submit
+  // Функция disabled button submit
   disabledButtonState() {
     this._submitButton.setAttribute('disabled', true);
     this._submitButton.classList.add(this._inactiveButtonClass);
   }
 
-  //Функция которая обрабатывает все формы
+  // Функция которая обрабатывает все формы
   _setEventListenersForm() {
     this._form.addEventListener('submit', (event) =>{
       event.preventDefault();
@@ -83,7 +83,7 @@ export default class FormValidator {
     });
   }
 
-  //Функция которая включает валидацию всех форм
+  // Функция которая включает валидацию всех форм
   enableValidation() {
     this._setEventListenersForm();
   }

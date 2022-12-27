@@ -4,6 +4,7 @@ export default class UserInfo {
         this._jobProfile = jobProfile;
     }
 
+    // Функция получения данных
     getUserInfo() {
      const userData = {
         name: this._nameProfile.textContent,
@@ -12,6 +13,7 @@ export default class UserInfo {
      return userData;
     }
 
+    // Функция замены данных
     setUserInfo(data) {
         this._nameProfile.textContent = data.name;
         this._jobProfile.textContent = data.job;

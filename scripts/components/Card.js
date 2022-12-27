@@ -6,7 +6,7 @@ export default class Card {
         this._handleCardClick = handleCardClick;
     }
 
-    //метод клонирования разметки из темплейта
+    // Функция клонирования разметки из темплейта
     _getTemplate() {
         const cardElement = document.querySelector(this._templateSelector)
         .content.querySelector('.element')
@@ -15,7 +15,7 @@ export default class Card {
         return cardElement;
     }
 
-    //метод like
+    // Функция like
     _setLikeHandler = () => {
         this._likeButtonCard = this._element.querySelector('.element__like-button');
         this._likeButtonCard.addEventListener('click', () => {
@@ -23,7 +23,7 @@ export default class Card {
       });
     }
 
-    //метод удаления
+    // Функция удаления
     _setDeleteHandler = () => {
         this._deleteButtonCard = this._element.querySelector('.element__trash-button');
         this._deleteButtonCard.addEventListener('click', () => {
@@ -31,7 +31,7 @@ export default class Card {
       });
     }
 
-    // //демонстрация картинки
+    // Функция демонстрации картинки
     _setShowImageCardHandler = () => {
       this._imageElement = this._element.querySelector('.element__image');
       this._imageElement.addEventListener('click', () => {
@@ -39,14 +39,14 @@ export default class Card {
       })
     }
 
-    //метод который навешивает все другие методы
+    // Функция, которая навешивает все другие методы
     _setEventListeners = () => {
         this._setLikeHandler();
         this._setDeleteHandler();
         this._setShowImageCardHandler();
     }
 
-    //метод создания готовой карточки
+    // Функция создания готовой карточки
     generateCard() {
         this._element = this._getTemplate();
         this._setEventListeners();

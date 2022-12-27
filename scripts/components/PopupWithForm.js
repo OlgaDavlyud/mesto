@@ -5,10 +5,11 @@ export default class PopupWithForm extends Popup {
         super(popup);
         this._submitForm = submitForm;
         this._form = this._popup.querySelector('.popup__form');
-        this._handelSubmitForm = this._handelSubmitForm.bind(this);
+        this._submitFormHandler = this._submitFormHandler.bind(this);
         this._inputList = this._form.querySelectorAll('.popup__input');
     }
 
+    // Функция сборки данных с input
     _getInputValues() {
         this._newCardValues = {};
         this._inputList.forEach(input => {
@@ -17,18 +18,21 @@ export default class PopupWithForm extends Popup {
         return this._newCardValues;
     }
 
-    _handelSubmitForm (evt) {
+    // Функция обработчик формы отправки
+    _submitFormHandler (evt) {
         evt.preventDefault();
         const formValues = this._getInputValues();
         this._submitForm(formValues);
         this.close();
-        }
-
-    setEventListeners() {
-        super.setEventListeners();
-        this._form.addEventListener('submit', this._handelSubmitForm);
     }
 
+    // Функция, которая навешивает слушатель
+    setEventListeners() {
+        super.setEventListeners();
+        this._form.addEventListener('submit', this._submitFormHandler);
+    }
+
+    // Функция закрытия
     close() {
         super.close();
         this._form.reset();
