@@ -1,4 +1,4 @@
-import '../pages/index.css';
+import './index.css';
 
 import Card from '../scripts/components/Card.js';
 import { initialCards } from '../scripts/utils/cards.js';
@@ -18,6 +18,7 @@ const popupShowImage = new PopupWithImage(popupShowCard);
 //Функция открытия окна редактирования данных
 function openPopupEdit() {
   popupEdit.open();
+  popupEdit.setEventListeners();
   const userData = userInfo.getUserInfo();
   nameInput.value = userData.name;
   jobInput.value = userData.job;
@@ -33,6 +34,7 @@ function submitEditProfileForm(data) {
 // Функция клика по карточке
 function handleCardClick (name, link) {
   popupShowImage.open(name, link);
+  popupShowImage.setEventListeners();
 }
 
 // Функция создания карточки
@@ -53,6 +55,7 @@ popupButtonOpenEditElement.addEventListener('click', openPopupEdit);
 //Слушатель открытия окна добавления карточек
 popupButtonOpenAddElement.addEventListener('click', function() {
   popupAdd.open();
+  popupAdd.setEventListeners();
   validityNewForm.resetValidation();
 });
 

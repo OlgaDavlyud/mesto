@@ -8,19 +8,19 @@ export default class Popup {
     // Функция открытия
     open() {
         this._popup.classList.add('popup_opened');
-        this.setEventListeners();
+        document.addEventListener('keydown', this._handleEscClose);
     }
 
     // Функция закрытия
     close() {
         this._popup.classList.remove('popup_opened');
+        document.removeEventListener('keydown', this._handleEscClose);
     }
 
     // Функция закрытия по Esc
     _handleEscClose = (event) => {
         if (event.key === 'Escape') {
-          const openedPopup = document.querySelector('.popup_opened');
-          this.close(openedPopup);
+          this.close();
         }
     }
 
@@ -34,6 +34,5 @@ export default class Popup {
     // Функция, которая навешивает слушатели для закрытия
     setEventListeners() {
         this._popup.addEventListener('mousedown', this._handleClickClose);
-        document.addEventListener('keyup', this._handleEscClose);
     }
 }

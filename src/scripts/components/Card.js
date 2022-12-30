@@ -15,28 +15,36 @@ export default class Card {
         return cardElement;
     }
 
+    // Метод like
+    _toggleLike = () => {
+      this._likeButtonCard.classList.toggle('element__like-button-active');
+    }
+
     // Функция like
     _setLikeHandler = () => {
         this._likeButtonCard = this._element.querySelector('.element__like-button');
-        this._likeButtonCard.addEventListener('click', () => {
-          this._likeButtonCard.classList.toggle('element__like-button-active');
-      });
+        this._likeButtonCard.addEventListener('click', this._toggleLike);
     }
 
+    // Метод удаления
+    _deleteCard = () => {
+      this._deleteButtonCard.closest('.element').remove();
+    }
     // Функция удаления
     _setDeleteHandler = () => {
         this._deleteButtonCard = this._element.querySelector('.element__trash-button');
-        this._deleteButtonCard.addEventListener('click', () => {
-          this._deleteButtonCard.closest('.element').remove();
-      });
+        this._deleteButtonCard.addEventListener('click', this._deleteCard);
+    }
+
+    // Метод демонстрации картинки
+    _handleImageClick = () => {
+      this._handleCardClick(this._name, this._link);
     }
 
     // Функция демонстрации картинки
     _setShowImageCardHandler = () => {
       this._imageElement = this._element.querySelector('.element__image');
-      this._imageElement.addEventListener('click', () => {
-        this._handleCardClick(this._name, this._link);
-      })
+      this._imageElement.addEventListener('click', this._handleImageClick);
     }
 
     // Функция, которая навешивает все другие методы
