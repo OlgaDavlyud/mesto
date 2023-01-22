@@ -8,6 +8,7 @@ import Section from '../scripts/components/Section.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
+// import Api from '../scripts/components/Api.js';
 
 // Создание новых классв
 const userInfo = new UserInfo({ nameProfile: nameProfile, jobProfile: jobProfile });
@@ -75,3 +76,6 @@ validityEditForm.enableValidation();
 
 const validityNewForm = new FormValidator(selectors, newCardForm);
 validityNewForm.enableValidation();
+
+// Api
+// const api = new Api();
