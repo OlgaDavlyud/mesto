@@ -1,9 +1,12 @@
 export default class Card {
-    constructor(data, templateSelector, handleCardClick) {
+    constructor(data, templateSelector, handleCardClick, handleTrashClick) {
         this._link = data.link;
         this._name = data.name;
         this._templateSelector = templateSelector;
         this._handleCardClick = handleCardClick;
+        this._handleTrashClick = handleTrashClick;
+        // this._api = api;
+        // this._id = data.id;
     }
 
     // Функция клонирования разметки из темплейта
@@ -27,13 +30,25 @@ export default class Card {
     }
 
     // Метод удаления
-    _deleteCard = () => {
-      this._deleteButtonCard.closest('.element').remove();
-    }
+    // _deleteCard = () => {
+    //   this._deleteButtonCard.closest('.element').remove();
+    // }
+
     // Функция удаления
+    // _setDeleteHandler = () => {
+    //     this._deleteButtonCard = this._element.querySelector('.element__trash-button');
+    //     this._deleteButtonCard.addEventListener('click', this._deleteCard);
+    // }
+
+    // Метод открытия окна подтверждения
+    _handleDeleteIconClick = () => {
+      this._handleTrashClick(this._element);
+    }
+
+    // Функция открытия окна подтверждения для удаления карточки
     _setDeleteHandler = () => {
-        this._deleteButtonCard = this._element.querySelector('.element__trash-button');
-        this._deleteButtonCard.addEventListener('click', this._deleteCard);
+      this._deleteButtonCard = this._element.querySelector('.element__trash-button');
+      this._deleteButtonCard.addEventListener('click', this._handleDeleteIconClick);
     }
 
     // Метод демонстрации картинки

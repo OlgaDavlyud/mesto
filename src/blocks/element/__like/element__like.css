@@ -1,5 +1,5 @@
 .element__like {
-    width: 25px;
+    max-width: max-content;
     max-height: 35px;
 
     display: flex;
