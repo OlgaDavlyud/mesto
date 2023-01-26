@@ -13,6 +13,7 @@ export default class Popup {
 
     // Функция закрытия
     close() {
+        console.log(this._popup);
         this._popup.classList.remove('popup_opened');
         document.removeEventListener('keydown', this._handleEscClose);
     }

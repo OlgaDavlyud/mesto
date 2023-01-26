@@ -1,14 +1,14 @@
 import './index.css';
 
 import Card from '../scripts/components/Card.js';
-import { initialCards } from '../scripts/utils/cards.js';
-import { popupEditElement, popupAddElement, popupUpdateAvatar, popupShowCard, popupWithSubmit, popupButtonOpenEditElement, popupButtonOpenAddElement, popupButtonOpenAvatarElement, editForm, newCardForm, UpdateAvatarForm, nameInput, jobInput, avatarInput, nameProfile, jobProfile, avatarPrifile, selectors } from '../scripts/utils/constants.js';
+// import { initialCards } from '../scripts/utils/cards.js';
+import { popupEditElement, popupAddElement, popupUpdateAvatar, popupShowCard, popupWithSubmit, popupButtonOpenEditElement, popupButtonOpenAddElement, popupButtonOpenAvatarElement, editForm, newCardForm, UpdateAvatarForm, nameInput, jobInput, avatarInput, nameProfile, jobProfile, avatarProfile, selectors } from '../scripts/utils/constants.js';
 import FormValidator from '../scripts/components/FormValidator.js';
 import Section from '../scripts/components/Section.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
-import PopupWithSubmit from '../scripts/components/PopupWithSubmit.js';
+import PopupWithConfirmation from '../scripts/components/PopupWithConfirmation.js';
 import Api from '../scripts/components/Api.js';
 
 // Создание новых классв
@@ -17,7 +17,7 @@ const popupAdd = new PopupWithForm(popupAddElement, renderCard);
 const popupEdit = new PopupWithForm(popupEditElement, submitEditProfileForm);
 const popupAvatar = new PopupWithForm(popupUpdateAvatar, updateAvatar);
 const popupShowImage = new PopupWithImage(popupShowCard);
-const popupDeleteCard = new PopupWithSubmit (popupWithSubmit);
+const popupDeleteCard = new PopupWithConfirmation (popupWithSubmit);
 
 //Функция открытия окна редактирования данных
 function openPopupEdit() {
@@ -53,15 +53,23 @@ function createCard (data) {
   return card.generateCard();
 }
 
+
 // Функция отрисовки карточки
 function renderCard (data) {
   const cardElement = createCard(data);
   intialCardList.addItem(cardElement);
 }
 
+const intialCardList = new Section ({
+  items: [],
+  renderer: renderCard
+},
+'.elements'
+);
+
 // Функция обновления аватара
 function updateAvatar () {
-  avatarPrifile.src = avatarInput.value;
+  avatarProfile.src = avatarInput.value;
 }
 
 //Слушатель открытия окна редактирования данных
@@ -83,14 +91,14 @@ popupButtonOpenAvatarElement.addEventListener('click', function() {
 })
 
 // Отрисовка карточек
-const intialCardList = new Section ({
-  items: initialCards,
-  renderer: renderCard
-},
-'.elements'
-);
+// const intialCardList = new Section ({
+//   items: initialCards,
+//   renderer: renderCard
+// },
+// '.elements'
+// );
 
-intialCardList.renderItems();
+// intialCardList.renderItems();
 
 //Валидация форм
 const validityEditForm = new FormValidator(selectors, editForm);
@@ -103,51 +111,43 @@ const validityUpdateAvatarForm = new FormValidator(selectors, UpdateAvatarForm);
 validityUpdateAvatarForm.enableValidation();
 
 // Api
-
-const apiUser = new Api({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-57/users/me',
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-57',
   headers: {
     authorization: 'de2e08e4-c231-4ebe-acd8-a48ea50e7d8e',
     'content-type': 'application/json'
   }
 });
 
-const userDataInfo = apiUser.getInitialUserData();
+const userDataInfo = api.getInitialUserData();
 
 userDataInfo
 .then((data) => {
-  // логика отображения
-  console.log('user data');
+  nameProfile.textContent = data.name,
+  jobProfile.textContent = data.about,
+  avatarProfile.src  = data.avatar
 })
 .catch((err) => {
   console.log(err);
 });
 
-const apiCard = new Api({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-57/cards',
-  headers: {
-    authorization: 'de2e08e4-c231-4ebe-acd8-a48ea50e7d8e',
-    'content-type': 'application/json'
-  }
-});
-
-const cards = apiCard.getInitialCards();
+const cards = api.getInitialCards();
 
 cards
 .then((data) => {
-  // логика отрисовка карточек
-  console.log('cards data');
+  intialCardList.setItems(data.map(card => ({ name: card.name, link: card.link })))
+  intialCardList.renderItems();
 })
 .catch((err) => {
   console.log(err);
 });
 
-const newUserData = apiUser.changeUserData();
+const newUserData = api.changeUserData(data);
 
 newUserData
 .then((data) => {
-  //метод обновления данных на странице
-  console.log('New User Data');
+  data.name = nameInput.textContent,
+  data.about = jobInput.textContent
 })
 .catch((err) => {
   console.log(err);

@@ -26,7 +26,7 @@ export const avatarInput = formUpdateAvatar.querySelector('.popup__input-update-
 export const profileElement = document.querySelector('.profile__info');
 export const nameProfile = profileElement.querySelector('.profile__name');
 export const jobProfile = profileElement.querySelector('.profile__about-yourself');
-export const avatarPrifile = document.querySelector('.profile__avatar');
+export const avatarProfile = document.querySelector('.profile__avatar');
 
 // переменные для валидации
 export const selectors = {

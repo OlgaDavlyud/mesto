@@ -5,17 +5,18 @@ export default class Section {
         this._container = document.querySelector(containerSelector);
     }
 
+    _createCard (data) {
+        const card = new Card(data, '.card-template', handleCardClick, handleTrashClick);
+        return card.generateCard();
+    }
+
+    setItems(data) {
+        this._renderedItems = data
+    }
+
     addItem(element) {
         this._container.prepend(element);
     }
-
-    // Метод сохранения
-    // _saveCard = (data) => {
-    //     this._api
-    //     .addCards({name: data})
-    //     .then((data) => this._getTemplate(data))
-    //     .catch((err) => console.log(err));
-    // }
 
     renderItems() {
         this._renderedItems.forEach((data) => {

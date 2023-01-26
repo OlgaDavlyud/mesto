@@ -1,16 +1,15 @@
 import Popup from './Popup.js';
 
-export default class PopupWithSubmit extends Popup {
+export default class PopupWithConfirmation extends Popup {
     constructor(popup) {
         super(popup);
         this._submitButton = this._popup.querySelector('.popup__button-submit');
     }
 
     // Функция обработчик подтверждения удаления
-    _submitDelete (evt) {
+    _submitDelete = (evt) => {
         evt.preventDefault();
-        this._submitButton.closest('.element').remove(); // не верно задана логика
-        this.close();
+        super.close();
     }
 
     setEventListeners() {
