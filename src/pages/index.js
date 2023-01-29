@@ -1,22 +1,22 @@
 import './index.css';
 
-import Card from '../scripts/components/Card.js';
-import { popupEditElement, popupAddElement, popupUpdateAvatar, popupShowCard, popupWithSubmit, popupButtonOpenEditElement, popupButtonOpenAddElement, popupButtonOpenAvatarElement, editForm, newCardForm, UpdateAvatarForm, nameInput, jobInput, nameProfile, jobProfile, avatarProfile, selectors } from '../scripts/utils/constants.js';
-import FormValidator from '../scripts/components/FormValidator.js';
-import Section from '../scripts/components/Section.js';
-import PopupWithForm from '../scripts/components/PopupWithForm.js';
-import UserInfo from '../scripts/components/UserInfo.js';
-import PopupWithImage from '../scripts/components/PopupWithImage.js';
-import PopupWithConfirmation from '../scripts/components/PopupWithConfirmation.js';
-import Api from '../scripts/components/Api.js';
+import Card from '../components/Card.js';
+import { popupButtonOpenEditElement, popupButtonOpenAddElement, popupButtonOpenAvatarElement, formEditUserData, newCardForm, formAvatars, nameInput, jobInput, nameProfile, jobProfile, avatarProfile, selectors } from '../utils/constants.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
+import Api from '../components/Api.js';
 
 // Создание новых классов
 const userInfo = new UserInfo({ nameProfile: nameProfile, jobProfile: jobProfile, avatarProfile: avatarProfile });
-const popupAdd = new PopupWithForm(popupAddElement, submitAddCard);
-const popupEdit = new PopupWithForm(popupEditElement, submitEditProfileForm);
-const popupAvatar = new PopupWithForm(popupUpdateAvatar, updateAvatar);
-const popupShowImage = new PopupWithImage(popupShowCard);
-const popupDeleteCard = new PopupWithConfirmation (popupWithSubmit);
+const popupAdd = new PopupWithForm('.popup-add', submitAddCard);
+const popupEdit = new PopupWithForm('.popup-edit', submitEditProfileForm);
+const popupAvatar = new PopupWithForm('.popup-update-avatar', updateAvatar);
+const popupShowImage = new PopupWithImage('.popup-show');
+const popupDeleteCard = new PopupWithConfirmation ('.popup-delete');
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-57',
@@ -35,11 +35,12 @@ const cardList = new Section({
 ".elements", api
 );
 
-let userId;
+let userId
 
 Promise.all([api.getInitialUserData(), api.getInitialCards()])
 .then(([userDataInfo, cards]) => {
   userInfo.setUserInfo(userDataInfo);
+  userInfo.setUserAvatar(userDataInfo);
   userId = userDataInfo._id;
   cardList.renderItems(cards);
 })
@@ -50,7 +51,6 @@ Promise.all([api.getInitialUserData(), api.getInitialCards()])
 //Функция открытия окна редактирования данных
 function openPopupEdit() {
   popupEdit.open();
-  popupEdit.setEventListeners();
   const userData = userInfo.getUserInfo();
   nameInput.value = userData.name;
   jobInput.value = userData.about;
@@ -63,7 +63,7 @@ function submitEditProfileForm(data) {
   popupEdit.renderLoading(true);
   api.changeUserData(data)
   .then((res) => {
-    userInfo.setUserInfo({ name: res.name, about: res.about, avatar: res.avatar })
+    userInfo.setUserInfo({ name: res.name, about: res.about })
   })
   .catch((err) => {
     console.log(err);
@@ -74,7 +74,6 @@ function submitEditProfileForm(data) {
 // Функция клика по карточке
 function handleCardClick (name, link) {
   popupShowImage.open(name, link);
-  popupShowImage.setEventListeners();
 }
 
 // Функция создания карточки
@@ -99,17 +98,18 @@ function createCard (data) {
     }
   }, (id) => {
     popupDeleteCard.open();
-    // popupDeleteCard. otherSubmit(() => {
-      const cardDelete = api.deleteCard(id)
+    popupDeleteCard.submitDeleteCard(() => {
+      api.deleteCard(id)
       .then((res) => {
+        console.log(res);
         popupDeleteCard.close();
-        cardDelete.deleteCard(id);
+        card.deleteСard();
       })
       .catch((err) => {
         console.log(err);
       })
     })
-  // })
+  })
   return card.generateCard();
 }
 
@@ -137,7 +137,8 @@ function updateAvatar(data) {
   popupAvatar.renderLoading(true);
   api.setNewAvatar(data)
   .then((res) => {
-    avatarProfile.setUserInfo({ avatar: res.avatar });
+    console.log(res);
+    userInfo.setUserAvatar({ avatar: data.avatar });
   })
   .catch((err) => {
     console.log(err);
@@ -151,24 +152,21 @@ popupButtonOpenEditElement.addEventListener('click', openPopupEdit);
 //Слушатель открытия окна добавления карточек
 popupButtonOpenAddElement.addEventListener('click', function() {
   popupAdd.open();
-  popupAdd.setEventListeners();
   validityNewForm.resetValidation();
 });
 
 //Слушатель открытия окна обновления аватара
 popupButtonOpenAvatarElement.addEventListener('click', function() {
   popupAvatar.open();
-  popupAvatar.setEventListeners();
   validityUpdateAvatarForm.resetValidation();
-  validityUpdateAvatarForm.disabledButtonState();
 })
 
 //Валидация форм
-const validityEditForm = new FormValidator(selectors, editForm);
+const validityEditForm = new FormValidator(selectors, formEditUserData);
 validityEditForm.enableValidation();
 
 const validityNewForm = new FormValidator(selectors, newCardForm);
 validityNewForm.enableValidation();
 
-const validityUpdateAvatarForm = new FormValidator(selectors, UpdateAvatarForm);
+const validityUpdateAvatarForm = new FormValidator(selectors, formAvatars);
 validityUpdateAvatarForm.enableValidation();

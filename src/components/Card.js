@@ -26,21 +26,20 @@ export default class Card {
       return this._likes.find(user => user._id === this._userId);
     }
 
-    // Метод установки лайка
-    _changeLikeQuantity(likeButtonCard) {
+    // Метод закрашивания значка лайка
+    _changeLikeActive() {
       if (this.isLiked()) {
-        likeButtonCard.classList.add('element__like-button-active');
+        this._likeButtonCard.classList.add('element__like-button-active');
       } else {
-        likeButtonCard.classList.remove('element__like-button-active');
+        this._likeButtonCard.classList.remove('element__like-button-active');
       }
     }
 
-    // Метод подсчета лайков
+    // Метод отображения кол-ва лайков
     countLikes(likes) {
       this._likes = likes;
-      this._likeCounter = this._element.querySelector('.element__like-counter');
       this._likeCounter.textContent = likes.length || '0';
-      this._changeLikeQuantity(this._likeButtonCard);
+      this._changeLikeActive();
     }
 
     // Метод для проверки и установки значка удаления
@@ -56,6 +55,7 @@ export default class Card {
     // Метод удаления карточки
     deleteСard = () => {
       this._element.remove();
+      this._element = null;
     }
 
     // Метод демонстрации картинки
@@ -85,8 +85,8 @@ export default class Card {
         this._imageElement.src = this._link;
         this._imageElement.alt = this._name;
         this._element.querySelector('.element__title').textContent = this._name;
+        this._likeCounter = this._element.querySelector('.element__like-counter');
         this.countLikes(this._likes);
-        this.deleteСard();
 
         return this._element;
     }

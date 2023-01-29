@@ -13,9 +13,9 @@ export const popupButtonOpenAvatarElement = document.querySelector('.profile__av
 // popups контейнеры и формы
 export const formEditElement = popupEditElement.querySelector('.popup__container');
 export const formUpdateAvatar = popupUpdateAvatar.querySelector('.popup__container-update-avatar');
-export const editForm = formEditElement.querySelector('.popup__form');
+export const formEditUserData = formEditElement.querySelector('.popup__form');
 export const newCardForm = popupAddElement.querySelector('.popup__form');
-export const UpdateAvatarForm = popupUpdateAvatar.querySelector('.popup__form');
+export const formAvatars = popupUpdateAvatar.querySelector('.popup__form');
 
 // popups inputs
 export const nameInput = formEditElement.querySelector('.popup__input-profile-name');
