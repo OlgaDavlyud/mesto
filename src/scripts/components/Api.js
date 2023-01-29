@@ -13,7 +13,7 @@ export default class Api {
         return Promise.reject(`Ошибка: ${res.status}`)
     }
 
-    // Метод получения данных пользователя с сервера
+    // Запрос получения данных пользователя с сервера
     getInitialUserData() {
         return fetch (`${this._baseUrl}/users/me`, {
             method: 'GET',
@@ -22,7 +22,7 @@ export default class Api {
         .then(this._checkReponse);
     }
 
-    // Метод получения карточек с сервера
+    // Запрос получения карточек с сервера
     getInitialCards() {
         return fetch (`${this._baseUrl}/cards`, {
             method: 'GET',
@@ -31,33 +31,33 @@ export default class Api {
         .then(this._checkReponse);
     }
 
-    // Метод изменения данных пользователя
+    // Запрос изменения данных пользователя
     changeUserData(data) {
         return fetch (`${this._baseUrl}/users/me`, {
-            method: 'PATCH',
+            method: "PATCH",
             headers: this._headers,
             body: JSON.stringify({
-                name: data.name,
-                about: data.job
+              name: data.name,
+              about: data.about,
             })
         })
         .then(this._checkReponse);
     }
 
-    // Метод добавления карточки
+    // Запрос добавления карточки
     addCard(data) {
         return fetch (`${this._baseUrl}/cards`, {
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify({
-                name: data.link,
-                link: data.link
+                name: data.name,
+                link: data.link,
             })
         })
         .then(this._checkReponse);
     }
 
-    // Метод удаления карточки
+    // Запрос удаления карточки
     deleteCard(id) {
         return fetch (`${this._baseUrl}/cards/${id}`, {
             method: 'DELETE',
@@ -66,7 +66,7 @@ export default class Api {
         .then(this._checkReponse);
     }
 
-    // Метод установки лайка
+    // Запрос установки лайка
     setLike(id) {
         return fetch (`${this._baseUrl}/cards/likes/${id}`, {
             method: 'PUT',
@@ -75,7 +75,7 @@ export default class Api {
         .then(this._checkReponse);
     }
 
-    // Метод снятия лайка
+    // Запрос снятия лайка
     deleteLike(id) {
         return fetch (`${this._baseUrl}/cards/likes/${id}`, {
             method: 'DELETE',
@@ -84,12 +84,13 @@ export default class Api {
         .then(this._checkReponse);
     }
 
+    // Запрос обновления аватара
     setNewAvatar(data) {
         return fetch (`${this._baseUrl}/users/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
-                avatar: data.src
+                avatar: data.avatar
             })
         })
     }
