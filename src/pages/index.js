@@ -63,8 +63,8 @@ function submitEditProfileForm(data) {
   popupEdit.renderLoading(true);
   api.changeUserData(data)
   .then((res) => {
-    popupEdit.close();
     userInfo.setUserInfo({ name: res.name, about: res.about })
+    popupEdit.close();
   })
   .catch((err) => {
     console.log(err);
@@ -99,7 +99,7 @@ function createCard (data) {
     }
   }, (id) => {
     popupDeleteCard.open();
-    popupDeleteCard.submitDeleteCard(() => {
+    popupDeleteCard.setSubmitAction(() => {
       api.deleteCard(id)
       .then((res) => {
         console.log(res);
@@ -139,8 +139,8 @@ function updateAvatar(data) {
   api.setNewAvatar(data)
   .then((res) => {
     console.log(res);
-    popupAvatar.close();
     userInfo.setUserAvatar({ avatar: data.avatar });
+    popupAvatar.close();
   })
   .catch((err) => {
     console.log(err);

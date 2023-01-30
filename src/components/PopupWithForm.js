@@ -25,7 +25,6 @@ export default class PopupWithForm extends Popup {
         evt.preventDefault();
         const formValues = this._getInputValues();
         this._submitForm(formValues);
-        // this.close();
     }
 
     // Функция, которая навешивает слушатель
