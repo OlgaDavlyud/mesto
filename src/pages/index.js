@@ -18,6 +18,12 @@ const popupAvatar = new PopupWithForm('.popup-update-avatar', updateAvatar);
 const popupShowImage = new PopupWithImage('.popup-show');
 const popupDeleteCard = new PopupWithConfirmation ('.popup-delete');
 
+popupAdd.setEventListeners();
+popupEdit.setEventListeners();
+popupAvatar.setEventListeners();
+popupShowImage.setEventListeners();
+popupDeleteCard.setEventListeners();
+
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-57',
   headers: {
