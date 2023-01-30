@@ -63,6 +63,7 @@ function submitEditProfileForm(data) {
   popupEdit.renderLoading(true);
   api.changeUserData(data)
   .then((res) => {
+    popupEdit.close();
     userInfo.setUserInfo({ name: res.name, about: res.about })
   })
   .catch((err) => {
@@ -138,6 +139,7 @@ function updateAvatar(data) {
   api.setNewAvatar(data)
   .then((res) => {
     console.log(res);
+    popupAvatar.close();
     userInfo.setUserAvatar({ avatar: data.avatar });
   })
   .catch((err) => {
