@@ -93,5 +93,6 @@ export default class Api {
                 avatar: data.avatar
             })
         })
+        .then(this._checkReponse);
     }
 }
